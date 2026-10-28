@@ -106,6 +106,7 @@ interface Ctx {
   lastRisk: number | null;
   factors: string[];
   logs: LogEntry[];
+  refreshLogs: () => void;
   addLog: (e: Omit<LogEntry, "id" | "time">) => void;
   resetBaseline: () => void;
   evaluate: (event: string, identity: string) => { risk: number; factors: string[] };
@@ -144,6 +145,7 @@ export function BioAuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const liveRef = useRef(live);
+  const refreshLogs = useCallback(() => setLogs((entries) => [...entries]), []);
   liveRef.current = live;
 
   const evaluate = useCallback(
@@ -175,7 +177,7 @@ export function BioAuthProvider({ children }: { children: ReactNode }) {
 
   const value: Ctx = {
     tab, setTab, mode, setMode, consent, setConsent, preset, baseline, applyPreset, setCustomBaseline,
-    enrolledProfiles, live, setLive, lastRisk, factors, logs, addLog, resetBaseline, evaluate,
+    enrolledProfiles, live, setLive, lastRisk, factors, logs, refreshLogs, addLog, resetBaseline, evaluate,
     session, setSession, modal, setModal, lockoutReasons, setLockoutReasons,
   };
   return <BioCtx.Provider value={value}>{children}</BioCtx.Provider>;

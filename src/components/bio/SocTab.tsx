@@ -37,7 +37,7 @@ export function SocTab() {
           <Button id="resetBaselineBtn" variant="outline" size="sm" className="border-danger/40 text-danger hover:bg-danger-soft hover:text-danger" onClick={bio.resetBaseline}>
             <RotateCcw /> Reset Baseline
           </Button>
-          <Button id="refreshBtn" variant="outline" size="sm" onClick={() => { setSpin(true); setTimeout(() => setSpin(false), 600); }}>
+          <Button id="refreshBtn" variant="outline" size="sm" onClick={() => { bio.refreshLogs(); setSpin(true); setTimeout(() => setSpin(false), 600); }}>
             <RefreshCw className={spin ? "animate-spin" : ""} /> Refresh Stream
           </Button>
         </div>
