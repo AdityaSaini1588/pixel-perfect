@@ -152,7 +152,7 @@ function MouseCanvas() {
       const now = performance.now();
       const recent = p.filter((q) => now - q.t < 500);
       let d = 0;
-      for (let i = 1; i < recent.length; i++) d += Math.hypot(recent[i].x - recent[i - 1].x, recent[i].y - recent[i - 1].y);
+      for (let i = 1; i < recent.length; i++) d += Math.hypot(recent[i]!.x - recent[i - 1]!.x, recent[i]!.y - recent[i - 1]!.y);
       const v = Math.round(d / devicePixelRatio / 0.5);
       if (v !== lastVel) { lastVel = v; setLive({ mouse: v }); }
     }, 300);
@@ -192,14 +192,14 @@ function MouseCanvas() {
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       for (let i = 2; i < p.length; i++) {
-        const a = 1 - (now - p[i].t) / 1600;
+        const a = 1 - (now - p[i]!.t) / 1600;
         ctx.globalAlpha = Math.max(0, a);
         ctx.lineWidth = 2.5 * devicePixelRatio;
-        const m1 = { x: (p[i - 2].x + p[i - 1].x) / 2, y: (p[i - 2].y + p[i - 1].y) / 2 };
-        const m2 = { x: (p[i - 1].x + p[i].x) / 2, y: (p[i - 1].y + p[i].y) / 2 };
+        const m1 = { x: (p[i - 2]!.x + p[i - 1]!.x) / 2, y: (p[i - 2]!.y + p[i - 1]!.y) / 2 };
+        const m2 = { x: (p[i - 1]!.x + p[i]!.x) / 2, y: (p[i - 1]!.y + p[i]!.y) / 2 };
         ctx.beginPath();
         ctx.moveTo(m1.x, m1.y);
-        ctx.quadraticCurveTo(p[i - 1].x, p[i - 1].y, m2.x, m2.y);
+        ctx.quadraticCurveTo(p[i - 1]!.x, p[i - 1]!.y, m2.x, m2.y);
         ctx.stroke();
       }
       ctx.globalAlpha = 1;
