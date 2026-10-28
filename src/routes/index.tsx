@@ -41,7 +41,7 @@ function useContinuousMonitor() {
       if (bio.mode === "normal") {
         bio.addLog({ identity: bio.session!, event: "MONITOR", mode: bio.mode, risk, decision: "ALLOW", diagnostic: "Continuous check OK" });
       } else {
-        bio.addLog({ identity: bio.session!, event: "MONITOR", mode: bio.mode, risk, decision: "LOCKED", diagnostic: factors[0].replace("Flagged: ", "") });
+        bio.addLog({ identity: bio.session!, event: "MONITOR", mode: bio.mode, risk, decision: "LOCKED", diagnostic: (factors[0] ?? "").replace("Flagged: ", "") });
         bio.setLockoutReasons(factors);
         bio.setSession(null);
         bio.setModal("lockout");

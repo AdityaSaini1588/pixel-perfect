@@ -204,7 +204,7 @@ function MouseCanvas() {
       }
       ctx.globalAlpha = 1;
       if (p.length) {
-        const l = p[p.length - 1];
+        const l = p[p.length - 1]!;
         ctx.fillStyle = color;
         ctx.beginPath();
         ctx.arc(l.x, l.y, 4 * devicePixelRatio, 0, Math.PI * 2);

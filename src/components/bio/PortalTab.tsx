@@ -48,11 +48,11 @@ function AuthView() {
         setMsg({ tone: "safe", text: `Identity verified · Risk ${risk}%` });
         setTimeout(() => bio.setSession(username), 450);
       } else if (risk <= 70) {
-        bio.addLog({ identity: username, event: "LOGIN", mode: bio.mode, risk, decision: "STEP_UP", diagnostic: factors[0].replace("Flagged: ", "") });
+        bio.addLog({ identity: username, event: "LOGIN", mode: bio.mode, risk, decision: "STEP_UP", diagnostic: (factors[0] ?? "").replace("Flagged: ", "") });
         setMsg({ tone: "warn", text: `Cadence varied from baseline · Risk ${risk}%` });
         bio.setModal("stepup");
       } else {
-        bio.addLog({ identity: username, event: "LOGIN", mode: bio.mode, risk, decision: "DENY", diagnostic: factors[0].replace("Flagged: ", "") });
+        bio.addLog({ identity: username, event: "LOGIN", mode: bio.mode, risk, decision: "DENY", diagnostic: (factors[0] ?? "").replace("Flagged: ", "") });
         setMsg({ tone: "danger", text: `Access denied — automated behavior detected · Risk ${risk}%` });
       }
     }, 700);
