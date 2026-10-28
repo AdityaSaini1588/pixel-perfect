@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 import { RefreshCw, RotateCcw } from "lucide-react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
@@ -71,7 +72,7 @@ export function SocTab() {
                     <td className="px-4 py-3 text-xs">{l.event}</td>
                     <td className="px-4 py-3 text-xs text-muted-foreground">{MODE_LABEL[l.mode]}</td>
                     <td className="px-4 py-3">
-                      <span className={`font-mono text-xs text-${riskTone(l.risk)}`}>{l.risk}%</span>
+                      <span className={cn("font-mono text-xs", { safe: "text-safe", warn: "text-warn", danger: "text-danger" }[riskTone(l.risk)])}>{l.risk}%</span>
                     </td>
                     <td className="px-4 py-3"><Pill tone={decisionTone(l.decision)}>{l.decision}</Pill></td>
                     <td className="px-4 py-3 text-xs text-muted-foreground">{l.diagnostic}</td>
