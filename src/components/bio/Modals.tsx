@@ -124,8 +124,8 @@ export function EnrollmentModal() {
           </div>
           <div className="rounded-xl border bg-secondary p-5 text-left">
             <div className="text-xs text-muted-foreground">Enrolled signature</div>
-            <div id="calibResultStyleTitle" className="mt-1 font-medium">{result!.title}</div>
-            <p id="calibResultStyleDesc" className="mt-1 text-sm text-muted-foreground">{result!.desc}</p>
+            <div id="calibResultStyleTitle" className="mt-1 font-medium">{result?.title}</div>
+            <p id="calibResultStyleDesc" className="mt-1 text-sm text-muted-foreground">{result?.desc}</p>
           </div>
           <Button id="btnFinishCalibration" size="lg" onClick={() => { close(); bio.setTab("portal"); }}>Return to Login & Test Now</Button>
         </div>

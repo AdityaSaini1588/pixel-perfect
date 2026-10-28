@@ -49,7 +49,7 @@ export function scoreRisk(mode: SimMode, live: { dwell: number; flight: number }
   const jitter = (n: number) => Math.round((Math.random() - 0.5) * n);
   if (mode === "bot") {
     return {
-      risk: 93 + Math.floor(Math.random() * 5),
+      risk: 95,
       factors: [
         "Flagged: Flight interval ≈ 0 ms — no human motor latency",
         "Flagged: Mouse trajectory perfectly linear (curvature 0.00)",
@@ -59,7 +59,7 @@ export function scoreRisk(mode: SimMode, live: { dwell: number; flight: number }
   }
   if (mode === "erratic") {
     return {
-      risk: 52 + Math.floor(Math.random() * 10),
+      risk: 55,
       factors: [
         `Flagged: Dwell time standard deviation deviated by ${(2.6 + Math.random()).toFixed(1)}σ`,
         "Flagged: Hesitation pauses > 600 ms between digraphs",
@@ -106,6 +106,7 @@ interface Ctx {
   lastRisk: number | null;
   factors: string[];
   logs: LogEntry[];
+  refreshLogs: () => void;
   addLog: (e: Omit<LogEntry, "id" | "time">) => void;
   resetBaseline: () => void;
   evaluate: (event: string, identity: string) => { risk: number; factors: string[] };
@@ -144,6 +145,7 @@ export function BioAuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const liveRef = useRef(live);
+  const refreshLogs = useCallback(() => setLogs((entries) => [...entries]), []);
   liveRef.current = live;
 
   const evaluate = useCallback(
@@ -175,7 +177,7 @@ export function BioAuthProvider({ children }: { children: ReactNode }) {
 
   const value: Ctx = {
     tab, setTab, mode, setMode, consent, setConsent, preset, baseline, applyPreset, setCustomBaseline,
-    enrolledProfiles, live, setLive, lastRisk, factors, logs, addLog, resetBaseline, evaluate,
+    enrolledProfiles, live, setLive, lastRisk, factors, logs, refreshLogs, addLog, resetBaseline, evaluate,
     session, setSession, modal, setModal, lockoutReasons, setLockoutReasons,
   };
   return <BioCtx.Provider value={value}>{children}</BioCtx.Provider>;
