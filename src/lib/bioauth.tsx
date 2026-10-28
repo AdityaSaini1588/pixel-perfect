@@ -49,7 +49,7 @@ export function scoreRisk(mode: SimMode, live: { dwell: number; flight: number }
   const jitter = (n: number) => Math.round((Math.random() - 0.5) * n);
   if (mode === "bot") {
     return {
-      risk: 93 + Math.floor(Math.random() * 5),
+      risk: 95,
       factors: [
         "Flagged: Flight interval ≈ 0 ms — no human motor latency",
         "Flagged: Mouse trajectory perfectly linear (curvature 0.00)",
@@ -59,7 +59,7 @@ export function scoreRisk(mode: SimMode, live: { dwell: number; flight: number }
   }
   if (mode === "erratic") {
     return {
-      risk: 52 + Math.floor(Math.random() * 10),
+      risk: 55,
       factors: [
         `Flagged: Dwell time standard deviation deviated by ${(2.6 + Math.random()).toFixed(1)}σ`,
         "Flagged: Hesitation pauses > 600 ms between digraphs",
